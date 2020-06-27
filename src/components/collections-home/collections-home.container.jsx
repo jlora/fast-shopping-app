@@ -4,15 +4,15 @@ import { compose } from 'redux';
 
 import { selectIsCollectionFetching } from '../../redux/collection/collection.selectors';
 import WithSpinner from '../with-spinner/with-spinner.component';
-import CollectionsOverview from './collections-overview.component';
+import CollectionsHome from './collections-home.component';
 
 const mapStateToProps = createStructuredSelector({
   isLoading: selectIsCollectionFetching
 });
 
-const CollectionsOverviewContainer = compose(
+const CollectionsHomeContainer = compose(
   connect(mapStateToProps),
   WithSpinner
-)(CollectionsOverview);
+)(CollectionsHome);
 
-export default CollectionsOverviewContainer;
+export default CollectionsHomeContainer;

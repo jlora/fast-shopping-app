@@ -1,13 +1,33 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-import Directory from '../../components/directory/directory.component';
+import { fetchCollectionsStart } from '../../redux/collection/collection.actions';
 
+import CollectionsHomeContainer from '../../components/collections-home/collections-home.container';
 import { HomePageContainer } from './homepage.styles';
 
-const HomePage = () => (
-  <HomePageContainer>
-    <Directory />
-  </HomePageContainer>
-);
+class HomePage extends React.Component {
+  componentDidMount() {
+    const { fetchCollectionsStart } = this.props;
 
-export default HomePage;
+    fetchCollectionsStart();
+  }
+
+  render(){
+    return (
+      <HomePageContainer>
+        <CollectionsHomeContainer />
+      </HomePageContainer>
+    )
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(HomePage);
+
