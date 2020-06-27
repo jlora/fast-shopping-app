@@ -34,7 +34,20 @@ const googleSignInStyles = css`
   }
 `;
 
+const placeOrderStyles = css`
+  background-color: #4285f4;
+  color: white;
+
+  &:hover {
+    background-color: #357ae8;
+    border: none;
+  }
+`;
+
 const getButtonStyles = props => {
+  if (props.isPlaceOrder) {
+    return placeOrderStyles;
+  }
   if (props.isGoogleSignIn) {
     return googleSignInStyles;
   }

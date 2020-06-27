@@ -43,3 +43,7 @@ export const WarningContainer = styled.div`
   font-size: 24px;
   color: red;
 `;
+
+export const CheckoutTitle = styled.h2 `
+  margin: 10px 0;
+`;
