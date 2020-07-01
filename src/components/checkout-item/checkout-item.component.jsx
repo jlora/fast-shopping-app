@@ -8,31 +8,30 @@ import {
 } from '../../redux/cart/cart.actions';
 
 import {
-  CheckoutItemContainer,
-  ImageContainer,
-  TextContainer,
-  QuantityContainer,
-  RemoveButtonContainer
+  ShoppingCartContainerGridRowItem,
+  ShoppingCartContainerGridColumnLg1,
+  ShoppingCartContainerGridColumnLg2,
+  ShoppingCartContainerGridColumnLg4,
 } from './checkout-item.styles';
 
 const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
   return (
-    <CheckoutItemContainer>
-      <ImageContainer>
+    <ShoppingCartContainerGridRowItem>
+      <ShoppingCartContainerGridColumnLg2>
         <img src={imageUrl} alt='item' />
-      </ImageContainer>
-      <TextContainer>{name}</TextContainer>
-      <QuantityContainer>
+      </ShoppingCartContainerGridColumnLg2>
+      <ShoppingCartContainerGridColumnLg4>{name}</ShoppingCartContainerGridColumnLg4>
+      <ShoppingCartContainerGridColumnLg2>
         <div onClick={() => removeItem(cartItem)}>&#10094;</div>
         <span>{quantity}</span>
         <div onClick={() => addItem(cartItem)}>&#10095;</div>
-      </QuantityContainer>
-      <TextContainer>{price}</TextContainer>
-      <RemoveButtonContainer onClick={() => clearItem(cartItem)}>
-        &#10005;
-      </RemoveButtonContainer>
-    </CheckoutItemContainer>
+      </ShoppingCartContainerGridColumnLg2>
+      <ShoppingCartContainerGridColumnLg2>{price}</ShoppingCartContainerGridColumnLg2>
+      <ShoppingCartContainerGridColumnLg1 onClick={() => clearItem(cartItem)}>
+        <div>&#10005;</div>
+      </ShoppingCartContainerGridColumnLg1>
+    </ShoppingCartContainerGridRowItem>
   );
 };
 

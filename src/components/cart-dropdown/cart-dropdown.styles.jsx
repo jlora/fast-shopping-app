@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import CustomButton from '../custom-button/custom-button.component';
+//import CustomButton from '../custom-button/custom-button.component';
+import { DefaultButton } from 'office-ui-fabric-react';
 
 export const CartDropdownContainer = styled.div`
   position: absolute;
@@ -15,8 +16,13 @@ export const CartDropdownContainer = styled.div`
   z-index: 5;
 `;
 
-export const CartDropdownButton = styled(CustomButton)`
+export const CartDropdownButton = styled(DefaultButton)`
   margin-top: auto;
+  width: 100%;
+  div {
+    font-size: 14px;
+    font-weight: 600;
+  }
 `;
 
 export const EmptyMessageContainer = styled.span`

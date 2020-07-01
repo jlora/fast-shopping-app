@@ -8,7 +8,8 @@ import {
   selectCartItems,
   selectCartTotal
 } from '../../redux/cart/cart.selectors';
-import CustomButton from '../custom-button/custom-button.component';
+//import CustomButton from '../custom-button/custom-button.component';
+import CheckoutButton from '../../components/checkout-button/checkout-button.component';
 //import { placeOrder } from '../../redux/shop/shop.actions';
 import {
   OrderSummaryContainer,
@@ -52,12 +53,12 @@ const OrderSummary = ({ cartItems, total }) => (
       </CartItemsContainer>
       <TotalContainer>TOTAL: ${total}</TotalContainer>
       <PlaceOrderButtonContainer>
-        <CustomButton
+        <CheckoutButton
           type='button'
           isPlaceOrder
         >
           Place Order
-        </CustomButton>
+        </CheckoutButton>
       </PlaceOrderButtonContainer>
     </OrderSummaryContainerFields>
   </OrderSummaryContainer>

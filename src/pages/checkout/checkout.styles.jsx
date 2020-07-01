@@ -1,49 +1,74 @@
 import styled from 'styled-components';
+import { Link } from 'office-ui-fabric-react/lib/Link';
 
-export const CheckoutPageContainer = styled.div`
-  width: 55%;
-  min-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 50px auto 0;
+export const ShoppingCartContainerGrid = styled.div.attrs( props => ({
+  className: "ms-Grid",
+  dir: "ltr"
+}))``;
 
-  button {
-    margin-left: auto;
-    margin-top: 50px;
-  }
+export const ShoppingCartContainerGridRow = styled.div.attrs(props => ({
+  className: "ms-Grid-row"
+}))`
+  height: 80px;
 `;
 
-export const CheckoutHeaderContainer = styled.div`
-  width: 100%;
+export const ShoppingCartContainerGridRowItem = styled.div.attrs(props => ({
+  className: "ms-Grid-row"
+}))`
   height: 40px;
-  display: flex;
-  justify-content: space-between;
   border-bottom: 1px solid darkgrey;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 600;
 `;
 
-export const HeaderBlockContainer = styled.div`
-  text-transform: capitalize;
-  width: 23%;
-
-  &:last-child {
-    width: 8%;
-  }
+export const ShoppingCartContainerGridColumnLg4 = styled.div.attrs(props => ({
+  className: "ms-Grid-col ms-md6 ms-lg4"
+}))`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
-export const TotalContainer = styled.div`
-  margin-top: 30px;
-  margin-left: auto;
-  font-size: 36px;
+export const ShoppingCartContainerGridColumnLg1 = styled.div.attrs(props => ({
+  className: "ms-Grid-col ms-sm6 ms-md4 ms-lg1"
+}))`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
-export const WarningContainer = styled.div`
-  text-align: center;
-  margin-top: 40px;
-  font-size: 24px;
-  color: red;
+export const ShoppingCartContainerGridColumnLg2 = styled.div.attrs(props => ({
+  className: "ms-Grid-col ms-sm6 ms-md4 ms-lg2"
+}))`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
-export const CheckoutTitle = styled.h2 `
-  margin: 10px 0;
+export const ShoppingCartContainerGridColumnLg10 = styled.div.attrs(props => ({
+  className: "ms-Grid-col ms-sm6 ms-md8 ms-lg10"
+}))`
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+`;
+
+export const ShoppingCartContainerGridColumnLg12 = styled.div.attrs(props => ({
+  className: "ms-Grid-col ms-sm6 ms-md8 ms-lg12"
+}))`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+export const CheckoutTitle = styled.h2`
+`;
+
+export const CheckoutColumnTitle = styled.h3`
+`;
+
+export const LinkButton = styled(Link)`
+  font-size: 18px;
+  font-weight: 400;
 `;

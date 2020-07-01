@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CollectionMenuContainer = styled.div `
+export const CollectionMenuContainer = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
