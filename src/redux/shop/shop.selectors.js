@@ -1,9 +1,18 @@
-/*import { createSelector } from 'reselect';
+import { createSelector } from 'reselect';
 
 const selectShop = state => state.shop;
 
-export const selectShops = createSelector(
+export const selectOrder = createSelector(
   [selectShop],
-  shop => shop.collections
+  shop => shop.order
 );
-*/
+
+export const selectIsShopFetching = createSelector(
+  [selectShop],
+  shop => shop.isFetching
+);
+
+export const selectIsShopLoaded = createSelector(
+  [selectShop],
+  shop => !!shop.order
+);

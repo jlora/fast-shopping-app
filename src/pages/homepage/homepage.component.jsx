@@ -9,7 +9,6 @@ import { HomePageContainer } from './homepage.styles';
 class HomePage extends React.Component {
   componentDidMount() {
     const { fetchCollectionsStart } = this.props;
-
     fetchCollectionsStart();
   }
 

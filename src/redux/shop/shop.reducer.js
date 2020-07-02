@@ -1,25 +1,25 @@
-/*import ShopActionTypes from './shop.types';
+import ShopActionTypes from './shop.types';
 
 const INITIAL_STATE = {
-  collections: null,
+  order: null,
   isFetching: false,
   errorMessage: undefined
 };
 
 const shopReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case ShopActionTypes.FETCH_COLLECTIONS_START:
+    case ShopActionTypes.CREATE_ORDER_START:
       return {
         ...state,
         isFetching: true
       };
-    case ShopActionTypes.FETCH_COLLECTIONS_SUCCESS:
+    case ShopActionTypes.CREATE_ORDER_SUCCESS:
       return {
         ...state,
         isFetching: false,
-        collections: action.payload
+        order: action.payload
       };
-    case ShopActionTypes.FETCH_COLLECTIONS_FAILURE:
+    case ShopActionTypes.CREATE_ORDER_FAILURE:
       return {
         ...state,
         isFetching: false,
@@ -29,6 +29,4 @@ const shopReducer = (state = INITIAL_STATE, action) => {
       return state;
   }
 };
-
 export default shopReducer;
-*/

@@ -6,7 +6,7 @@ import {
 } from './collection.actions';
 
 import CollectionActionTypes from './collection.types';
-import apiCall from '../api';
+import {apiCall} from '../api';
 
 export function* fetchCollectionsAsync() {
   try {

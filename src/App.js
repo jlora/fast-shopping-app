@@ -11,6 +11,7 @@ import ShopPage from './pages/shop/shop.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 import CheckOutDetailPage from './pages/checkout-detail/checkout-detail.component';
+import PurchasePage from './pages/purchasepage/purchasepage.component';
 
 import Header from './components/header/header.component';
 //import Header from './components/test-to-delete/header.component'
@@ -62,6 +63,7 @@ const App = ({checkUserSession, currentUser}) => {
             <Route path='/shop' component={ShopPage} />
             <Route exact path='/checkout' component={CheckoutPage} />
             <Route exact path='/checkoutdetail' component={CheckOutDetailPage} />
+            <Route exact path='/purchasedetail' component={PurchasePage} />
             <Route
               exact
               path='/signin'

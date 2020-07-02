@@ -24,7 +24,7 @@ import {
 } from './order-summary.styles';
 
 //const OrderSummary = ({ cartItems, history, dispatch }) => (
-const OrderSummary = ({ cartItems, total }) => (
+const OrderSummary = ({ cartItems, total, history }) => (
   <OrderSummaryContainer>
     <OrderSummaryTitle>Order Summary</OrderSummaryTitle>
     <OrderSummaryContainerFields>
@@ -53,12 +53,7 @@ const OrderSummary = ({ cartItems, total }) => (
       </CartItemsContainer>
       <TotalContainer>TOTAL: ${total}</TotalContainer>
       <PlaceOrderButtonContainer>
-        <CheckoutButton
-          type='button'
-          isPlaceOrder
-        >
-          Place Order
-        </CheckoutButton>
+        <CheckoutButton onClick={() => history.push('/purchasedetail')}>Place Order</CheckoutButton>
       </PlaceOrderButtonContainer>
     </OrderSummaryContainerFields>
   </OrderSummaryContainer>

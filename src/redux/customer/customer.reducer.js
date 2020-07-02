@@ -25,6 +25,11 @@ const customerReducer = (state = INITIAL_STATE, action) => {
         isFetching: false,
         errorMessage: action.payload
       };
+    case CustomerActionTypes.SET_CUSTOMER_SUCCESS:
+      return {
+        ...state,
+        customer: action.payload
+      };
     default:
       return state;
   }

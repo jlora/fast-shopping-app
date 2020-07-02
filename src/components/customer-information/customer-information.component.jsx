@@ -115,7 +115,6 @@ class CustomerInformation extends React.Component {
   }
 
   initCustomerDetailInfo = (customer) => {
-    console.log('CUSTOMER PROBLEM:', customer);
     const { fullName, identifier, address, phone, email} = customer;
     return (
       <CustomerDetailInfoContainer>

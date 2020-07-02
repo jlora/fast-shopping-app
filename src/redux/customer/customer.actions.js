@@ -14,3 +14,8 @@ export const fetchCustomerFailure = errorMessage => ({
   type: CustomerActionTypes.FETCH_CUSTOMER_FAILURE,
   payload: errorMessage
 });
+
+export const setCustomer = customer => ({
+  type: CustomerActionTypes.SET_CUSTOMER_SUCCESS,
+  payload: customer
+});

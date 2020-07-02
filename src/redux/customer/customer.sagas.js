@@ -6,7 +6,7 @@ import {
 } from './customer.actions';
 
 import CustomerActionTypes from './customer.types';
-import apiCall from '../api';
+import {apiCall} from '../api';
 
 export function* fetchCustomerAsync(action) {
   try {
@@ -25,7 +25,7 @@ export function* fetchCustomerAsync(action) {
         "email": email
       }
     }
-    const customer = yield call(apiCall, 'get', '/customers?filter='+ JSON.stringify(filter))
+    const customer = yield call(apiCall, 'GET', '/customers?filter='+ JSON.stringify(filter), null)
     yield put(fetchCustomerSuccess(customer?customer[0]:null));
   } catch (error) {
     yield put(fetchCustomerFailure(error.message));
