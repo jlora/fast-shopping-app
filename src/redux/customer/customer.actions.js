@@ -19,3 +19,19 @@ export const setCustomer = customer => ({
   type: CustomerActionTypes.SET_CUSTOMER_SUCCESS,
   payload: customer
 });
+
+const getNewCustomer = (name, value, customer) => {
+  customer = customer ? customer: customer = {};
+  customer[name] = value
+  return customer;
+}
+
+export const updateCustomerByNameValue = (name, value, customer) => ({
+  type: CustomerActionTypes.UPDATE_CUSTOMER_BY_NAME_VALUE,
+  payload: getNewCustomer(name, value, customer)
+});
+
+export const setOptionSelected = option => ({
+  type: CustomerActionTypes.SET_CUSTOMER_OPTION_SELECTED,
+  payload: option
+});

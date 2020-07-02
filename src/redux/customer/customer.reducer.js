@@ -3,7 +3,8 @@ import CustomerActionTypes from './customer.types';
 const INITIAL_STATE = {
   customer: null,
   isFetching: false,
-  errorMessage: undefined
+  errorMessage: undefined,
+  optionSelected: 'optionA'
 };
 
 const customerReducer = (state = INITIAL_STATE, action) => {
@@ -26,6 +27,16 @@ const customerReducer = (state = INITIAL_STATE, action) => {
         errorMessage: action.payload
       };
     case CustomerActionTypes.SET_CUSTOMER_SUCCESS:
+      return {
+        ...state,
+        customer: action.payload
+      };
+    case CustomerActionTypes.SET_CUSTOMER_OPTION_SELECTED:
+      return {
+        ...state,
+        optionSelected: action.payload
+      };
+    case CustomerActionTypes.UPDATE_CUSTOMER_BY_NAME_VALUE:
       return {
         ...state,
         customer: action.payload

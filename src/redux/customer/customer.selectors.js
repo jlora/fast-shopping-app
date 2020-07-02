@@ -12,6 +12,11 @@ export const selectorIsCustomerFetching = createSelector(
   customer => customer.isFetching
 );
 
+export const selectorOptionSelected = createSelector(
+  [selectorCustomers],
+  customer => customer.optionSelected
+);
+
 export const selectIsCustomerLoaded = createSelector(
   [selectorCustomers],
   customer => !!customer.customer

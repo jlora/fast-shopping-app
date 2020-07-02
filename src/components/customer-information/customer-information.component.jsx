@@ -1,11 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import FormInput from '../form-input/form-input.component';
-import CustomButton from '../custom-button/custom-button.component';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import {
+  TextField
+} from 'office-ui-fabric-react/lib/TextField';
 
-import { selectorCustomer } from '../../redux/customer/customer.selectors';
-import { fetchCustomerStart } from '../../redux/customer/customer.actions';
+import CheckoutButton from '../../components/checkout-button/checkout-button.component';
+import { selectorCustomer, selectorOptionSelected } from '../../redux/customer/customer.selectors';
+import {
+  fetchCustomerStart,
+  updateCustomerByNameValue,
+  setOptionSelected
+} from '../../redux/customer/customer.actions';
 import {
   CustomerInformationContainer,
   CustomerInformationTitle,
@@ -17,100 +25,135 @@ import {
 import { Item, Wrapper, RadioButton, RadioButtonLabel } from './new-existing-customer-radio-button.styles';
 
 class CustomerInformation extends React.Component {
-  constructor() {
-    super();
 
-    this.state = {
-      fullName: '',
-      identifier: '',
-      address: '',
-      phone: '',
-      email: '',
-      select: "optionA",
-    };
+
+  handleSelectChange = async (event) => {
+    const value = event.target.value;
+    const { setOptionSelected } = this.props;
+    console.log('VALUE:', value)
+    await setOptionSelected(value);
+  };
+
+  handleSubmit = async (values, actions) => {
+    const { fetchCustomerStart } = this.props;
+    const { email } = values;
+    await fetchCustomerStart({ email });
+  };
+
+  handleBlur = async (event) => {
+    const { name, value } = event.target;
+    const { updateCustomerByNameValue, customer } = this.props;
+    await updateCustomerByNameValue(name, value, customer);
   }
 
-  handleSelectChange = event => {
-    const value = event.target.value;
-    this.setState({ select: value });
-  };
-
-  handleSubmit = async event => {
-    event.preventDefault();
-    const { fetchCustomerStart } = this.props;
-    const { email } = this.state;
-
-    fetchCustomerStart({ email });
-  };
-
-  handleChange = event => {
-    const { name, value } = event.target;
-
-    this.setState({ [name]: value });
-  };
+  textField = ({field, form, ...props}) => {
+    return <TextField {...field} {...props} />
+  }
 
   initFormExistingCustomer = () => {
-    const { email } = this.state;
-    return (
-      <form className='sign-up-form' onSubmit={this.handleSubmit}>
-        <FormInput
-          type='email'
-          name='email'
-          value={email}
-          onChange={this.handleChange}
-          label='Email'
-          required
+    const existingCustomerForm = ({
+      handleSubmit,
+      values,
+      errors,
+    }) => (
+      <Form onSubmit={handleSubmit}>
+        <Field 
+          value={values.email}
+          type="email"
+          label="Email*"
+          name="email" 
+          component={this.textField} 
+          errorMessage={errors.email?errors.email: ''}
+          placeholder="Email"
         />
-        <CustomButton type='submit'>LOOKUP</CustomButton>
-      </form>
+        <CheckoutButton type='submit'>Lookup</CheckoutButton>
+      </Form>
+    );
+    return (
+      <Formik 
+        initialValues={{ email: '' }}
+        validationSchema={Yup.object({
+          email: Yup.string()
+            .email('Invalid email address')
+            .required('Required'),
+        })}
+        onSubmit={this.handleSubmit}
+        component={existingCustomerForm} />
     );
   }
 
-  initFormNewCustomer = () => {
-    const { fullName, identifier, address, phone, email } = this.state;
+  initFormNewCustomer = () => {;
+
+    const existingCustomerForm = ({
+      values,
+      errors,
+    }) => (
+      <Form>
+        <Field 
+          value={values.fullName}
+          onBlur={this.handleBlur}
+          label="Full Name*"
+          name="fullName" 
+          component={this.textField} 
+          errorMessage={errors.fullName?errors.fullName: ''}
+          placeholder="Full Name"
+        />
+        <Field 
+          value={values.identifier}
+          onBlur={this.handleBlur}
+          label="ID*"
+          name="identifier" 
+          component={this.textField} 
+          errorMessage={errors.identifier?errors.identifier: ''}
+          placeholder="ID"
+        />
+        <Field 
+          value={values.address}
+          onBlur={this.handleBlur}
+          label="Address*"
+          name = "address"
+          component={this.textField} 
+          errorMessage={errors.address?errors.address: ''}
+          placeholder="Address"
+        />
+        <Field 
+          value={values.phone}
+          onBlur={this.handleBlur}
+          label="Phone Number*"
+          name = "phone"
+          component={this.textField} 
+          errorMessage={errors.phone?errors.phone: ''}
+          placeholder="Phone"
+        />
+        <Field 
+          value={values.email}
+          onBlur={this.handleBlur}
+          type="email"
+          label="Email*"
+          name="email" 
+          component={this.textField} 
+          errorMessage={errors.email?errors.email: ''}
+          placeholder="Email"
+        />
+      </Form>
+    );
     return (
-      <form className='sign-up-form' onSubmit={this.handleSubmit}>
-        <FormInput
-          type='text'
-          name='fullName'
-          value={fullName}
-          onChange={this.handleChange}
-          label='Full Name'
-          required
-        />
-        <FormInput
-          type='text'
-          name='identifier'
-          value={identifier}
-          onChange={this.handleChange}
-          label='ID'
-          required
-        />
-        <FormInput
-          type='text'
-          name='address'
-          value={address}
-          onChange={this.handleChange}
-          label='Address'
-          required
-        />
-        <FormInput
-          type='text'
-          name='phone'
-          value={phone}
-          onChange={this.handleChange}
-          label='Phone'
-          required
-        />
-        <FormInput
-          type='email'
-          name='email'
-          value={email}
-          onChange={this.handleChange}
-          label='Email'
-          required
-        />
-      </form>
+      <Formik 
+        initialValues={{ email: '' }}
+        validationSchema={Yup.object({
+          email: Yup.string()
+            .email('Invalid email address')
+            .required('Required'),
+          fullName: Yup.string()
+            .required('Required'),
+          identifier: Yup.string()
+            .required('Required'),
+          address: Yup.string()
+            .required('Required'),
+          phone: Yup.string()
+            .required('Required'),
+        })}
+        component={existingCustomerForm} />
     );
   }
 
@@ -128,30 +171,30 @@ class CustomerInformation extends React.Component {
   }
 
   render() {
-    const {select } = this.state;
-    const {customer} = this.props;
+    const {customer, optionSelected} = this.props;
+    console.log('optionSelected:::', optionSelected);
     return (
       <CustomerInformationContainer>
         <CustomerInformationTitle>Customer Information</CustomerInformationTitle>
         <CustomerInformationFormContainer>
           <Wrapper>
-            <Item active={select === "optionA"}>
+            <Item active={optionSelected === "optionA"}>
               <RadioButton
                 type="radio"
                 name="radio"
                 value="optionA"
-                checked={select === "optionA"}
+                checked={optionSelected === "optionA"}
                 onChange={this.handleSelectChange}
               />
               <RadioButtonLabel />
               <div>New Customer</div>
             </Item>
-            <Item active={select === "optionB"}>
+            <Item active={optionSelected === "optionB"}>
               <RadioButton
                 type="radio"
                 name="radio"
                 value="optionB"
-                checked={select === "optionB"}
+                checked={optionSelected === "optionB"}
                 onChange={this.handleSelectChange}
               />
               <RadioButtonLabel />
@@ -159,7 +202,7 @@ class CustomerInformation extends React.Component {
             </Item>
           </Wrapper>
           {
-            customer && select !== "optionA" ? this.initCustomerDetailInfo(customer) : select === "optionA" ? this.initFormNewCustomer() : this.initFormExistingCustomer()
+            customer && optionSelected !== "optionA" ? this.initCustomerDetailInfo(customer) : optionSelected === "optionA" ? this.initFormNewCustomer() : this.initFormExistingCustomer()
           } 
         </CustomerInformationFormContainer>
       </CustomerInformationContainer>
@@ -168,11 +211,14 @@ class CustomerInformation extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  customer: selectorCustomer
+  customer: selectorCustomer,
+  optionSelected: selectorOptionSelected
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchCustomerStart: customer => dispatch(fetchCustomerStart(customer))
+  fetchCustomerStart: customer => dispatch(fetchCustomerStart(customer)),
+  updateCustomerByNameValue: (name, value, customer) => dispatch(updateCustomerByNameValue(name, value, customer)),
+  setOptionSelected: option => dispatch(setOptionSelected(option))
 });
 
 export default connect(
